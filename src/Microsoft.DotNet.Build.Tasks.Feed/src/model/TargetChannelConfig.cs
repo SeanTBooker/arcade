@@ -56,7 +56,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
         public string InstallersFeed { get; }
 
         /// <summary>
-        /// Should publish to Msdl
+        /// Publish to symbol server
         /// </summary>
         public SymbolTargetType SymbolTargetType { get; }
 

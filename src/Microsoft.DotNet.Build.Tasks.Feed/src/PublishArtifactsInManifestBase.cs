@@ -347,11 +347,11 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
 
                 Dictionary<string, string> serversToPublish = new Dictionary<string, string>();
                 
-                if (feedConfigsForSymbols.Any(x => (x.SymbolTargetType & SymbolTargetType.Msdl) != SymbolTargetType.None))
+                if (feedConfigsForSymbols.Any(x => ((x.SymbolTargetType & SymbolTargetType.Msdl) != SymbolTargetType.None)))
                 {
                     serversToPublish.Add(MsdlServerPath, msdlToken);
                 }
-                if (feedConfigsForSymbols.Any(x => (x.SymbolTargetType & SymbolTargetType.SymWeb) != SymbolTargetType.None))
+                if (feedConfigsForSymbols.Any(x => ((x.SymbolTargetType & SymbolTargetType.SymWeb) != SymbolTargetType.None)))
                 {
                     serversToPublish.Add(SymwebServerPath, symWebToken);
                 }
