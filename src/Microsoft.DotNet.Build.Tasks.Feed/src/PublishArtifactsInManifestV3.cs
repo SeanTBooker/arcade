@@ -151,6 +151,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                         BuildEngine = this.BuildEngine,
                         targetChannelConfig.SymbolTargetType);
 
+
                     var targetFeedConfigs = targetFeedsSetup.Setup();
 
                     // No target feeds to publish to, very likely this is an error

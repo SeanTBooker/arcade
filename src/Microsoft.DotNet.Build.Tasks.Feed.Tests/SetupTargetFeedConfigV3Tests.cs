@@ -43,6 +43,8 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Tests
             TargetFeedContentType.Other
         };
 
+        private const SymbolTargetType SymbolTargetType = Model.SymbolTargetType.None;
+        
         private readonly ITestOutputHelper Output;
 
         public SetupTargetFeedConfigV3Tests(ITestOutputHelper output)
@@ -143,7 +145,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Tests
                     LatestLinkShortUrlPrefix,
                     AzureDevOpsFeedsKey,
                     buildEngine,
-                    false,
+                    SymbolTargetType,
                     StablePackageFeed,
                     StableSymbolsFeed
                 );
@@ -245,7 +247,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Tests
                     LatestLinkShortUrlPrefix,
                     AzureDevOpsFeedsKey,
                     buildEngine: buildEngine,
-                    false
+                    SymbolTargetType
                 );
 
             var actualFeeds = config.Setup();
@@ -344,7 +346,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Tests
                     LatestLinkShortUrlPrefix,
                     AzureDevOpsFeedsKey,
                     buildEngine: buildEngine,
-                    false
+                    SymbolTargetType
                 );
 
             var actualFeeds = config.Setup();
