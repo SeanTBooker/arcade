@@ -346,17 +346,13 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                 HashSet<TargetFeedConfig> feedConfigsForSymbols = FeedConfigs[category];
 
                 Dictionary<string, string> serversToPublish = new Dictionary<string, string>();
-
-                SymbolTargetType publishTo =  feedConfigsForSymbols.First().SymbolTargetType;
       
-                if ((publishTo & SymbolTargetType.Msdl) != SymbolTargetType.None)
+                if ((feedConfigsForSymbols.First().SymbolTargetType & SymbolTargetType.Msdl) != SymbolTargetType.None)
                 {
-                    Log.LogMessage(MessageImportance.High, $"Publishing to msdl. Publish to {publishTo} , expression evaluation : {(publishTo & SymbolTargetType.Msdl) != SymbolTargetType.None}");
                     serversToPublish.Add(MsdlServerPath, msdlToken);
                 }
-                if ((publishTo & SymbolTargetType.SymWeb) != SymbolTargetType.None)
-                {
-                    Log.LogMessage(MessageImportance.High, $"Publishing to symweb. Publish to {publishTo} , expression evaluation : {(publishTo & SymbolTargetType.SymWeb) != SymbolTargetType.None}");
+                if ((feedConfigsForSymbols.First().SymbolTargetType & SymbolTargetType.SymWeb) != SymbolTargetType.None)
+                { 
                     serversToPublish.Add(SymwebServerPath, symWebToken);
                 }
                 foreach( var test in serversToPublish)
@@ -395,6 +391,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                     symbolLog.AppendLine("Successfully published to Symbol Server.");
                     symbolLog.AppendLine();
                     Log.LogMessage(MessageImportance.High, symbolLog.ToString());
+                    symbolLog.Clear();
                 }
             }
             else
