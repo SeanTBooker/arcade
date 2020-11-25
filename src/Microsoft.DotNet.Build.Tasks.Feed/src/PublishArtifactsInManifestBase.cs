@@ -347,6 +347,10 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
 
                 Dictionary<string, string> serversToPublish = new Dictionary<string, string>();
                 
+                foreach(var feedConfig in feedConfigsForSymbols)
+                {
+                    Log.LogMessage(MessageImportance.High, $"Symbol should be published to :{feedConfig.ContentType} {feedConfig.SymbolTargetType}");
+                }
                 if (feedConfigsForSymbols.Any(x => ((x.SymbolTargetType & SymbolTargetType.Msdl) != SymbolTargetType.None)))
                 {
                     serversToPublish.Add(MsdlServerPath, msdlToken);
