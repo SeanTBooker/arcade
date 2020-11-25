@@ -346,18 +346,22 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                 HashSet<TargetFeedConfig> feedConfigsForSymbols = FeedConfigs[category];
 
                 Dictionary<string, string> serversToPublish = new Dictionary<string, string>();
-                
-                foreach(var feedConfig in feedConfigsForSymbols)
+
+                SymbolTargetType publishTo =  feedConfigsForSymbols.First().SymbolTargetType;
+      
+                if ((publishTo & SymbolTargetType.Msdl) != SymbolTargetType.None)
                 {
-                    Log.LogMessage(MessageImportance.High, $"Symbol should be published to :{feedConfig.ContentType} {feedConfig.SymbolTargetType}");
-                }
-                if (feedConfigsForSymbols.Any(x => ((x.SymbolTargetType & SymbolTargetType.Msdl) != SymbolTargetType.None)))
-                {
+                    Log.LogMessage(MessageImportance.High, $"Publishing to msdl. Publish to {publishTo} , expression evaluation : {(publishTo & SymbolTargetType.Msdl) != SymbolTargetType.None}");
                     serversToPublish.Add(MsdlServerPath, msdlToken);
                 }
-                if (feedConfigsForSymbols.Any(x => ((x.SymbolTargetType & SymbolTargetType.SymWeb) != SymbolTargetType.None)))
+                if ((publishTo & SymbolTargetType.SymWeb) != SymbolTargetType.None)
                 {
+                    Log.LogMessage(MessageImportance.High, $"Publishing to symweb. Publish to {publishTo} , expression evaluation : {(publishTo & SymbolTargetType.SymWeb) != SymbolTargetType.None}");
                     serversToPublish.Add(SymwebServerPath, symWebToken);
+                }
+                foreach( var test in serversToPublish)
+                {
+                    Log.LogMessage(MessageImportance.High, $"Server : {test.Key} , {test.Value}");
                 }
 
                 IEnumerable<string> filesToSymbolServer = null;
