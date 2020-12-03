@@ -35,6 +35,10 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
         [Required] 
         public string CheckSumsFeedKey { get; set; }
 
+        public string InternalInstallersFeedKey { get; set; }
+
+        public string InternalCheckSumsFeedKey { get; set; }
+
         public bool PublishInstallersAndChecksums { get; set; }
 
         public string PdbArtifactsBasePath { get; set; }
@@ -64,6 +68,11 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
             try
             {
                 List<int> targetChannelsIds = new List<int>();
+
+                PublishingConstants.InternalChecksumsFeedKey = InternalCheckSumsFeedKey;
+                PublishingConstants.InternalInstallersFeedKey = InternalInstallersFeedKey;
+                PublishingConstants.InstallersFeedKey = InstallersFeedKey;
+                PublishingConstants.ChecksumsFeedKey = CheckSumsFeedKey;
 
                 foreach (var channelIdStr in TargetChannels.Split(','))
                 {
@@ -140,16 +149,16 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                         AzureStorageTargetFeedKey,
                         PublishInstallersAndChecksums,
                         targetChannelConfig.InstallersFeed,
-                        InstallersFeedKey,
+                        targetChannelConfig.InstallerFeedKey,
                         targetChannelConfig.ChecksumsFeed,
-                        CheckSumsFeedKey,
+                        targetChannelConfig.CheckSumsFeedKey,
                         targetChannelConfig.ShippingFeed,
                         targetChannelConfig.TransportFeed,
                         targetChannelConfig.SymbolsFeed,
                         $"dotnet/{targetChannelConfig.AkaMSChannelName}",
                         AzureDevOpsFeedsKey,
                         BuildEngine = this.BuildEngine,
-                        targetChannelConfig.SymbolTargetType);
+                        targetChannelConfig.SymbolTargetType); ;
 
                     var targetFeedConfigs = targetFeedsSetup.Setup();
 

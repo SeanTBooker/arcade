@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.DotNet.VersionTools.BuildManifest.Model;
+using NuGet.ContentModel;
 using System;
 
 namespace Microsoft.DotNet.Build.Tasks.Feed.Model
@@ -60,6 +61,10 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
         /// </summary>
         public SymbolTargetType SymbolTargetType { get; }
 
+        public string InstallerFeedKey { get; }
+
+        public string CheckSumsFeedKey { get; }
+
         public TargetChannelConfig(
             int id,
             PublishingInfraVersion publishingInfraVersion,
@@ -69,7 +74,9 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
             string symbolsFeed,
             string checksumsFeed,
             string installersFeed,
-            SymbolTargetType symbolTargetType)
+            SymbolTargetType symbolTargetType,
+            string installerFeedKey,
+            string checksumsFeedKey)
         {
             Id = id;
             PublishingInfraVersion = publishingInfraVersion;
@@ -80,6 +87,8 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
             ChecksumsFeed = checksumsFeed;
             InstallersFeed = installersFeed;
             SymbolTargetType = symbolTargetType;
+            InstallerFeedKey = installerFeedKey;
+            CheckSumsFeedKey = checksumsFeedKey;
         }
 
         public override string ToString()
@@ -106,7 +115,9 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
                    TransportFeed.Equals(config.TransportFeed, StringComparison.OrdinalIgnoreCase) &&
                    SymbolsFeed.Equals(config.SymbolsFeed, StringComparison.OrdinalIgnoreCase) &&
                    ChecksumsFeed.Equals(config.ChecksumsFeed, StringComparison.OrdinalIgnoreCase) &&
-                   InstallersFeed.Equals(config.InstallersFeed, StringComparison.OrdinalIgnoreCase);
+                   InstallersFeed.Equals(config.InstallersFeed, StringComparison.OrdinalIgnoreCase) &&
+                   InstallerFeedKey.Equals(config.InstallerFeedKey, StringComparison.OrdinalIgnoreCase) && 
+                   CheckSumsFeedKey.Equals(config.CheckSumsFeedKey, StringComparison.OrdinalIgnoreCase);
         }
 
         public override int GetHashCode()
@@ -118,7 +129,9 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
                 TransportFeed, 
                 SymbolsFeed, 
                 ChecksumsFeed, 
-                InstallersFeed).GetHashCode();
+                InstallersFeed,
+                InstallerFeedKey,
+                CheckSumsFeedKey).GetHashCode();
         }
     }
 }

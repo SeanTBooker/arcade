@@ -110,6 +110,8 @@
       PublishInstallersAndChecksums="$(PublishInstallersAndChecksums)"
       ChecksumsFeedKey="$(ChecksumsFeedKey)"
       InstallersFeedKey="$(InstallersFeedKey)"
+      InternalInstallersFeedKey = "$(InternalInstallersTargetStaticFeedKey)"
+      InternalChecksumsFeedKey = "$(InternalChecksumsTargetStaticFeedKey)"
       AzureDevOpsFeedsKey="$(AzureDevOpsFeedsKey)"
       AzureStorageTargetFeedKey="$(AzureStorageTargetFeedPAT)"
       AssetManifestPaths="@(ManifestFiles)"
