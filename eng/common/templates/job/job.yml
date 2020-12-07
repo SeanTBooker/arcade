@@ -146,7 +146,7 @@ jobs:
     - task: PublishBuildArtifacts@1
       displayName: Publish pipeline artifacts
       inputs:
-        PathtoPublish: $(Build.SourcesDirectory)/artifacts/richnav
+        PathtoPublish: $(Build.ArtifactStagingDirectory)/artifacts/richnav
         PublishLocation: Container
         ArtifactName: RichCodeNav_Logs
       continueOnError: true
