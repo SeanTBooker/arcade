@@ -93,6 +93,10 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
         private const SymbolTargetType InternalSymbolTargets = SymbolTargetType.Msdl;
         private const SymbolTargetType PublicAndInternalSymbolTargets = SymbolTargetType.Msdl | SymbolTargetType.SymWeb;
 
+        private const string FeedDotNetLibrariesShipping = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-libraries/nuget/v3/index.json";
+        private const string FeedDotNetLibrariesTransport = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-libraries-transport/nuget/v3/index.json";
+        private const string FeedDotNetLibrariesSymbols = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-libraries-symbols/nuget/v3/index.json";
+
         public static readonly List<TargetChannelConfig> ChannelInfos = new List<TargetChannelConfig>() {
             // ".NET 5 Dev",
             new TargetChannelConfig(
@@ -720,10 +724,25 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
                 FeedDotNetToolsTransport,
                 FeedDotNetToolsSymbols,
                 FeedForChecksums,
+<<<<<<< HEAD
                 FeedForInstallers,
                 PublicAndInternalSymbolTargets,
                 InstallersFeedKey,
                 ChecksumsFeedKey),
+=======
+                FeedForInstallers),
+
+            // ".NET Libraries",
+            new TargetChannelConfig(
+                1648,
+                PublishingInfraVersion.All,
+                akaMSChannelName: string.Empty,
+                FeedDotNetLibrariesShipping,
+                FeedDotNetLibrariesTransport,
+                FeedDotNetLibrariesSymbols,
+                FeedForChecksums,
+                FeedForInstallers),
+>>>>>>> ea8811c58beebebfdc4df8165bb393746370fa26
         };
         #endregion
     }
