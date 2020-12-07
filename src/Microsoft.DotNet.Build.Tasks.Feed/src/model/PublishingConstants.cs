@@ -724,13 +724,10 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
                 FeedDotNetToolsTransport,
                 FeedDotNetToolsSymbols,
                 FeedForChecksums,
-<<<<<<< HEAD
                 FeedForInstallers,
                 PublicAndInternalSymbolTargets,
                 InstallersFeedKey,
                 ChecksumsFeedKey),
-=======
-                FeedForInstallers),
 
             // ".NET Libraries",
             new TargetChannelConfig(
@@ -741,8 +738,10 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
                 FeedDotNetLibrariesTransport,
                 FeedDotNetLibrariesSymbols,
                 FeedForChecksums,
-                FeedForInstallers),
->>>>>>> ea8811c58beebebfdc4df8165bb393746370fa26
+                FeedForInstallers,
+                PublicAndInternalSymbolTargets,
+                InstallersFeedKey,
+                ChecksumsFeedKey),
         };
         #endregion
     }
