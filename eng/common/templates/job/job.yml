@@ -135,6 +135,22 @@ jobs:
         environment: ${{ coalesce(parameters.richCodeNavigationEnvironment, 'production') }}
         richNavLogOutputDirectory: $(Build.SourcesDirectory)/artifacts/bin
       continueOnError: true
+    - task: CopyFiles@2
+      displayName: Gather binaries for publish to artifacts
+      inputs:
+        SourceFolder: 'artifacts/bin'
+        Contents: '**\*.log'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/artifacts/richnav'
+      continueOnError: true
+      condition: always()
+    - task: PublishBuildArtifacts@1
+      displayName: Publish pipeline artifacts
+      inputs:
+        PathtoPublish: $(Build.SourcesDirectory)/artifacts/richnav
+        PublishLocation: Container
+        ArtifactName: RichCodeNav_Logs
+      continueOnError: true
+      condition: always()
 
   - ${{ if eq(parameters.enableMicrobuild, 'true') }}:
     - ${{ if and(eq(parameters.runAsPublic, 'false'), ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
