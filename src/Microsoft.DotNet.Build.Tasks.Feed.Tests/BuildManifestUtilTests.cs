@@ -335,7 +335,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Tests
                 new TaskItem(localPackagePath, new Dictionary<string, string>()
                 {
                     { "CertificateName", "IHasACert" },
-                    { "PublicKeyToken", "BLORG" }
+                    { "PublicKeyToken", "abcdabcdabcdabcd" }
                 })
             };
 
@@ -385,9 +385,9 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Tests
                         modelFromItems.Identity.Branch,
                         modelFromItems.Identity.Commit,
                         modelFromItems.Identity.Attributes.Select(kv => $"{kv.Key}={kv.Value}").ToArray(),
-                        bool.Parse(modelFromItems.Identity.IsStable),
+                        modelFromItems.Identity.IsStable,
                         modelFromItems.Identity.PublishingVersion,
-                        bool.Parse(modelFromItems.Identity.IsReleaseOnlyPackageVersion),
+                        modelFromItems.Identity.IsReleaseOnlyPackageVersion,
                         modelFromItems.SigningInformation);
 
                 // Read the xml file back in and create a model from it.
@@ -401,8 +401,8 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Tests
                 modelFromItems.Identity.BuildId.Should().Be(_testAzdoBuildId);
                 modelFromItems.Identity.Commit.Should().Be(_testBuildCommit);
                 modelFromItems.Identity.PublishingVersion.Should().Be(VersionTools.BuildManifest.Model.PublishingInfraVersion.Next);
-                modelFromItems.Identity.IsReleaseOnlyPackageVersion.Should().Be("False");
-                modelFromItems.Identity.IsStable.Should().Be("True");
+                modelFromItems.Identity.IsReleaseOnlyPackageVersion.Should().BeFalse();
+                modelFromItems.Identity.IsStable.Should().BeTrue();
                 modelFromFile.Artifacts.Blobs.Should().SatisfyRespectively(
                     blob =>
                     {
@@ -454,7 +454,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Tests
                     {
                         item.Include.Should().Be("test-package-a.1.0.0.nupkg");
                         item.CertificateName.Should().Be("IHasACert");
-                        item.PublicKeyToken.Should().Be("BLORG");
+                        item.PublicKeyToken.Should().Be("abcdabcdabcdabcd");
                     });
                 modelFromFile.SigningInformation.FileSignInfo.Should().SatisfyRespectively(
                     item =>
@@ -466,12 +466,12 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Tests
                     item =>
                     {
                         item.Include.Should().Be("MyCert");
-                        item.DualSigningAllowed.Should().Be("false");
+                        item.DualSigningAllowed.Should().Be(false);
                     },
                     item =>
                     {
                         item.Include.Should().Be("MyOtherCert");
-                        item.DualSigningAllowed.Should().Be("true");
+                        item.DualSigningAllowed.Should().Be(true);
                     });
                 modelFromFile.SigningInformation.FileExtensionSignInfo.Should().SatisfyRespectively(
                     item =>
@@ -553,7 +553,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Tests
                 new TaskItem(localPackagePath, new Dictionary<string, string>()
                 {
                     { "CertificateName", "IHasACert" },
-                    { "PublicKeyToken", "BLORG" }
+                    { "PublicKeyToken", "abcdabcdabcdabcd" }
                 })
             };
 
@@ -607,7 +607,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Tests
                 {
                     item.Include.Should().Be("test-package-a.1.0.0.nupkg");
                     item.CertificateName.Should().Be("IHasACert");
-                    item.PublicKeyToken.Should().Be("BLORG");
+                    item.PublicKeyToken.Should().Be("abcdabcdabcdabcd");
                 });
             model.SigningInformation.FileSignInfo.Should().SatisfyRespectively(
                 item =>
@@ -619,12 +619,12 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Tests
                 item =>
                 {
                     item.Include.Should().Be("MyCert");
-                    item.DualSigningAllowed.Should().Be("false");
+                    item.DualSigningAllowed.Should().Be(false);
                 },
                 item =>
                 {
                     item.Include.Should().Be("MyOtherCert");
-                    item.DualSigningAllowed.Should().Be("true");
+                    item.DualSigningAllowed.Should().Be(true);
                 });
             model.SigningInformation.FileExtensionSignInfo.Should().SatisfyRespectively(
                 item =>

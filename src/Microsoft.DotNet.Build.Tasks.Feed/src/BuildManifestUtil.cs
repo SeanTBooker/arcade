@@ -203,7 +203,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                 foreach (var signInfo in certificatesSignInfo)
                 {
                     var attributes = signInfo.CloneCustomMetadata() as IDictionary<string, string>;
-                    parsedCertificatesSignInfoModel.Add(new CertificatesSignInfoModel { Include = signInfo.ItemSpec, DualSigningAllowed = attributes["DualSigningAllowed"] });
+                    parsedCertificatesSignInfoModel.Add(new CertificatesSignInfoModel { Include = signInfo.ItemSpec, DualSigningAllowed = bool.Parse(attributes["DualSigningAllowed"]) });
                 }
             }
 
@@ -243,9 +243,9 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                         BuildId = manifestBuildId,
                         Branch = manifestBranch,
                         Commit = manifestCommit,
-                        IsStable = isStableBuild.ToString(),
+                        IsStable = isStableBuild,
                         PublishingVersion = publishingVersion,
-                        IsReleaseOnlyPackageVersion = isReleaseOnlyPackageVersion.ToString()
+                        IsReleaseOnlyPackageVersion = isReleaseOnlyPackageVersion
                     });
 
             buildModel.Artifacts.Blobs.AddRange(blobArtifacts);
