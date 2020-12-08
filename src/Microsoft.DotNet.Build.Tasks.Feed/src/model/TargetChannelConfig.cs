@@ -116,8 +116,9 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
                    SymbolsFeed.Equals(config.SymbolsFeed, StringComparison.OrdinalIgnoreCase) &&
                    ChecksumsFeed.Equals(config.ChecksumsFeed, StringComparison.OrdinalIgnoreCase) &&
                    InstallersFeed.Equals(config.InstallersFeed, StringComparison.OrdinalIgnoreCase) &&
-                   InstallerFeedKey.Equals(config.InstallerFeedKey, StringComparison.OrdinalIgnoreCase) && 
-                   CheckSumsFeedKey.Equals(config.CheckSumsFeedKey, StringComparison.OrdinalIgnoreCase);
+                   SymbolTargetType = config.SymbolTargetType &&
+                   InstallerFeedKey = config.InstallerFeedKey && 
+                   CheckSumsFeedKey = config.CheckSumsFeedKey;
         }
 
         public override int GetHashCode()
@@ -130,6 +131,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
                 SymbolsFeed, 
                 ChecksumsFeed, 
                 InstallersFeed,
+                SymbolTargetType,
                 InstallerFeedKey,
                 CheckSumsFeedKey).GetHashCode();
         }
