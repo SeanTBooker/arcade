@@ -116,7 +116,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
                    SymbolsFeed.Equals(config.SymbolsFeed, StringComparison.OrdinalIgnoreCase) &&
                    ChecksumsFeed.Equals(config.ChecksumsFeed, StringComparison.OrdinalIgnoreCase) &&
                    InstallersFeed.Equals(config.InstallersFeed, StringComparison.OrdinalIgnoreCase) &&
-                   SymbolTargetType = config.SymbolTargetType &&
+                   SymbolTargetType.Equals(config.SymbolTargetType, StringComparison.OrdinalIgnoreCase) &&
                    InstallerFeedKey = config.InstallerFeedKey && 
                    CheckSumsFeedKey = config.CheckSumsFeedKey;
         }
