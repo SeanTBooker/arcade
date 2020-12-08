@@ -118,7 +118,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed.Model
                    InstallersFeed.Equals(config.InstallersFeed, StringComparison.OrdinalIgnoreCase) &&
                    SymbolTargetType = config.SymbolTargetType &&
                    InstallerFeedKey.Equals(config.InstallerFeedKey , StringComparison.OrdinalIgnoreCase) && 
-                   CheckSumsFeedKey.Equals(config.CheckSumsFeedKey, , StringComparison.OrdinalIgnoreCase);
+                   CheckSumsFeedKey.Equals(config.CheckSumsFeedKey, StringComparison.OrdinalIgnoreCase);
         }
 
         public override int GetHashCode()
