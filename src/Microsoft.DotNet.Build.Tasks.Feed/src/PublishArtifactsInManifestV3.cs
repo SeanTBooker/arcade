@@ -158,7 +158,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                         $"dotnet/{targetChannelConfig.AkaMSChannelName}",
                         AzureDevOpsFeedsKey,
                         BuildEngine = this.BuildEngine,
-                        targetChannelConfig.SymbolTargetType); ;
+                        targetChannelConfig.SymbolTargetType);
 
                     var targetFeedConfigs = targetFeedsSetup.Setup();
 
