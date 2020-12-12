@@ -142,7 +142,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                     Log.LogMessage(MessageImportance.High, $"Publishing to this target channel: {targetChannelConfig}");
 
                     var targetFeedsSetup = new SetupTargetFeedConfigV3(
-                        InternalBuild,
+                        targetChannelConfig.IsInternal,
                         BuildModel.Identity.IsStable,
                         BuildModel.Identity.Name,
                         BuildModel.Identity.Commit,
