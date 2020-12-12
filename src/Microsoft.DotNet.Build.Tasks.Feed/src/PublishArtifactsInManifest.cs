@@ -159,6 +159,10 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
 
         public string AkaMSGroupOwner { get; set; }
 
+        public string InternalCheckSumsFeedKey { get; set; }
+
+        public string InternalInstallersFeedKey { get; set; }
+
         /// <summary>
         /// Just an internal flag to keep track whether we published assets via a V3 manifest or not.
         /// </summary>
@@ -299,7 +303,6 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                 BuildAssetRegistryToken = this.BuildAssetRegistryToken,
                 MaxClients = this.MaxClients,
                 NugetPath = this.NugetPath,
-                InternalBuild = this.InternalBuild,
                 SkipSafetyChecks = this.SkipSafetyChecks,
                 AkaMSClientId = this.AkaMSClientId,
                 AkaMSClientSecret = this.AkaMSClientSecret,
@@ -316,7 +319,9 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                 SymWebToken = this.SymWebToken,
                 MsdlToken = this.MsdlToken,
                 SymbolPublishingExclusionsFile = this.SymbolPublishingExclusionsFile,
-                PublishSpecialClrFiles = this.PublishSpecialClrFiles
+                PublishSpecialClrFiles = this.PublishSpecialClrFiles,
+                InternalCheckSumsFeedKey = this.InternalCheckSumsFeedKey,
+                InternalInstallersFeedKey = this.InternalInstallersFeedKey
             };
         }
     }
