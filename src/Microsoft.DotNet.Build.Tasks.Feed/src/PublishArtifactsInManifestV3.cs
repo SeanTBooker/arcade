@@ -73,9 +73,12 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                 PublishingConstants.InternalInstallersFeedKey = InternalInstallersFeedKey;
                 PublishingConstants.InstallersFeedKey = InstallersFeedKey;
                 PublishingConstants.ChecksumsFeedKey = CheckSumsFeedKey;
+                
+                Log.LogMessage(MessageImportance.High , $"Publishing to following channels {TargetChannels}" );
 
                 foreach (var channelIdStr in TargetChannels.Split(','))
                 {
+                    Log.LogMessage(MessageImportance.High, $"Publishing to channel : {channelIdStr}");
                     if (!int.TryParse(channelIdStr, out var channelId))
                     {
                         Log.LogError($"Value '{channelIdStr}' isn't recognized as a valid Maestro++ channel ID.");
